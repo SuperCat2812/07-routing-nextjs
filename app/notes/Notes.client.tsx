@@ -70,7 +70,6 @@ export default function NotesClient({ tag }: NotesClientProps) {
         )}
         {notes.length > 0 && <NoteList notes={notes} />}
       </div>
-      ;
     </>
   );
 }
