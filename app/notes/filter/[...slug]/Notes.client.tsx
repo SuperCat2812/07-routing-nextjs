@@ -3,7 +3,7 @@ import NoteList from "@/components/NoteList/NoteList";
 import { fetchNotes } from "@/lib/api";
 import { TagValue } from "@/types/note";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import css from "../../NotesPage.module.css";
+import css from "./NotesPage.module.css";
 
 interface NotesClientProps {
   tag: TagValue | undefined;
