@@ -11,7 +11,7 @@ export interface Notes {
 }
 
 export interface NoteParams {
-  page: number;
+  page?: number;
   search?: string;
   tag?: TagValue;
   perPage?: number;

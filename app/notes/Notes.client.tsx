@@ -5,25 +5,29 @@ import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { fetchNotes } from "@/lib/api";
-import { Note } from "@/types/note";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import css from "./NotesPage.module.css";
-
-export default function NotesClient() {
+import { TagValue } from "@/types/note";
+interface NotesClientProps {
+  tag: TagValue | undefined;
+}
+export default function NotesClient({ tag }: NotesClientProps) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const updateQuery = useDebouncedCallback((query) => {
     setQuery(query);
     setPage(1);
   }, 300);
+
   const { data } = useQuery({
-    queryKey: ["note", { page, query }],
-    queryFn: () => fetchNotes({ page, search: query }),
+    queryKey: ["note", { page, query, tag }],
+    queryFn: () => fetchNotes({ page, search: query, tag }),
     enabled: true,
     placeholderData: keepPreviousData,
   });
+
   const notes = data?.notes || [];
   const totalPage = data?.totalPages || 1;
   const [onModal, setOnModal] = useState(false);
