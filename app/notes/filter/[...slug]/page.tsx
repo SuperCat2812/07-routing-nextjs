@@ -1,11 +1,15 @@
 import mapCategory from "@/lib/utils";
 
-import { QueryClient } from "@tanstack/react-query";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
-import NotesClientSlug from "./Notes.client";
+import NotesClient from "./Notes.client";
 
 interface FilterProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 export default async function Filter({ params }: FilterProps) {
   const { slug } = await params;
@@ -17,5 +21,9 @@ export default async function Filter({ params }: FilterProps) {
     queryFn: () => fetchNotes({ tag: param }),
   });
 
-  return <NotesClientSlug tag={param} />;
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <NotesClient tag={param} />
+    </HydrationBoundary>
+  );
 }

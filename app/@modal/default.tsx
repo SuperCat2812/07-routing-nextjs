@@ -1,3 +1,3 @@
 export default function defaultPageModal() {
-  return <></>;
+  return null;
 }

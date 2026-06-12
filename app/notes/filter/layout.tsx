@@ -6,8 +6,10 @@ type Props = {
 export default function NotesLayout({ children, sidebar }: Props) {
   return (
     <section>
-      <div>{children}</div>
-      <aside>{sidebar}</aside>
+      <div>
+        <aside>{sidebar}</aside>
+        {children}
+      </div>
     </section>
   );
 }

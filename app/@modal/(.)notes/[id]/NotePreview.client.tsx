@@ -20,9 +20,9 @@ export default function NoteDetails() {
       {data && (
         <NotePreview>
           <NoteDetailsClient note={data} />
-          {isLoading && <Loading />} {error && <ErrorRoute error={error} />}
         </NotePreview>
       )}
+      {isLoading && <Loading />} {error && <ErrorRoute error={error} />}
     </>
   );
 }
