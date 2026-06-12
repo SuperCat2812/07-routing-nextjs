@@ -9,11 +9,8 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import css from "./NotesPage.module.css";
-import { TagValue } from "@/types/note";
-interface NotesClientProps {
-  tag: TagValue | undefined;
-}
-export default function NotesClient({ tag }: NotesClientProps) {
+
+export default function NotesClient() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const updateQuery = useDebouncedCallback((query) => {
@@ -22,8 +19,8 @@ export default function NotesClient({ tag }: NotesClientProps) {
   }, 300);
 
   const { data } = useQuery({
-    queryKey: ["note", { page, query, tag }],
-    queryFn: () => fetchNotes({ page, search: query, tag }),
+    queryKey: ["note", { page, query }],
+    queryFn: () => fetchNotes({ page, search: query }),
     enabled: true,
     placeholderData: keepPreviousData,
   });

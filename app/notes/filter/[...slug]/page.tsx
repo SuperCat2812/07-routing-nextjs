@@ -2,6 +2,7 @@ import mapCategory from "@/lib/utils";
 import NotesClient from "../../Notes.client";
 import { QueryClient } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
+import NotesClientSlug from "./Notes.client";
 
 interface FilterProps {
   params: Promise<{ slug: string }>;
@@ -16,5 +17,5 @@ export default async function Filter({ params }: FilterProps) {
     queryFn: () => fetchNotes({ tag: param }),
   });
 
-  return <NotesClient tag={param} />;
+  return <NotesClientSlug tag={param} />;
 }
